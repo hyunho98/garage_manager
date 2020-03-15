@@ -23,4 +23,13 @@ class UsersController < ApplicationController
       redirect '/signup'
     end
   end
+
+  get '/index' do
+    if logged_in?
+      @user = current_user
+      erb :index
+    else
+      redirect '/'
+    end
+  end
 end
