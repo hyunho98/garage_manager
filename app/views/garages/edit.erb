@@ -1,0 +1,31 @@
+<h1>EDIT FORM</h1>
+<h2>Name: <%= @garage.name %></h2>
+<h3>Location: <%= @garage.address %></h3>
+<h3>Capacity: <%= "#{@cars.length} out of #{@garage.capacity}" %>
+<br>
+<form action="/garages/<% @garage.id %>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="PATCH">
+
+  <h5>Uncheck the boxes of the cars you wish to REMOVE from this garage</h5>
+  <% @cars.each do |car| %>
+  <input type="checkbox" name="garage[car_ids][]" id="<% car.id %>" value="<% car.id %>" <% 'checked' %>><br>
+  <% end %>
+
+  <h5>Check the boxes of the cars you wish to ADD to this garage</h5>
+  <% @garageless.each do |car| %>
+  <input type="checkbox" name="garage[car_ids][]" id="<% car.id %>" value="<% car.id %>"><br>
+  <% end %>
+
+  <h5>MAKE SURE THE TOTAL AMOUNT OF CHECKED BOXES DOES NOT SURPASS THE MAXIMUM CAPACITY</h5>
+
+  <br>
+
+  <label for="name">Name: </label>
+  <input id="name" type="text" name="garage[name]"><br>
+  <label for="location">Location: </label>
+  <input id="location" type="text" name="garage[address]">
+  <label for="capacity">Capacity: </label>
+  <input id="capacity" type="number" name="garage[capacity]"><br>
+
+  <input id="submit" type="submit" value="Save Changes">
+</form>
