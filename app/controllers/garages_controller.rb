@@ -22,9 +22,10 @@ class GaragesController < ApplicationController
   end
 
   get '/garages/:id/edit' do
+    not_logged_in?
     @garage = Garage.find(params[:id])
     @cars = @garage.cars
-    @garageless = Car.all.collect {|car| if car.garage == nil}
+    @garageless = Car.all.collect {|car| car.garage == nil}
     erb :'/garages/edit'
   end
 

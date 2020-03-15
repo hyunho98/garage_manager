@@ -4,9 +4,9 @@
 <% if @full %>
   <h5>This garage is full!</h5>
 <% else %>
-  <h5><%= @garage.capacity - @cars.length %> spaces available</h5>
+  <h5><%= @garage.capacity - @cars.length %> out of <%= @garage.capacity %> spaces available</h5>
   <br>
-  <h5>Click <a href="/garages/<% @garage.id %>/edit">HERE</a> to edit this garage!
+  <h5>Click <a href="/garages/<%= @garage.id %>/edit">HERE</a> to edit this garage!
   <h5>Click <a href='/cars/new'>HERE</a> to add a car to this garage!</h5>
 <% end %>
 <br>
