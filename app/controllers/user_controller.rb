@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   post '/signup' do
     user = User.new(params)
     if user.save && user.name != "" && user.email != "" && user.authenticate(params[:password])
-      session[:user_id] = @user.id
+      session[:user_id] = user.id
       redirect '/index'
     else
       redirect '/signup'
@@ -25,12 +25,9 @@ class UsersController < ApplicationController
   end
 
   get '/index' do
-    if logged_in?
+    not_logged_in?
       @user = current_user
       erb :index
-    else
-      redirect '/'
-    end
   end
 
   get '/logout' do
