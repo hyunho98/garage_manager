@@ -4,6 +4,7 @@ class CreateGarages < ActiveRecord::Migration
       t.string :name
       t.string :address
       t.integer :capacity
+      t.integer :user_id
     end
   end
 end

@@ -5,6 +5,8 @@ class CreateCars < ActiveRecord::Migration
       t.string :model
       t.integer :year
       t.float :price
+      t.integer :garage_id
+      t.integer :user_id
     end
   end
 end
