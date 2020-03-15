@@ -17,6 +17,7 @@ class GaragesController < ApplicationController
 
   get '/garages/new' do
     not_logged_in?
+    @user = current_user
     erb:'/garages/new'
   end
 end
