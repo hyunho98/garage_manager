@@ -1,0 +1,16 @@
+<h2><%= @garage.name %></h2>
+<br>
+<% if @full do %>
+  <h5>This garage is full!</h5>
+<% else %>
+  <h5><%= @garage.capacity - @cars.length %> spaces available</h5>
+  <br>
+  <h5>Click <a href='/cars/new'>HERE</a> to add a car to this garage!</h5>
+<% end %>
+<br>
+<h5>To edit a car, click on it's name!</h5>
+<% @cars.each do |car| %>
+  <h4><a href="/car/<% #{car.id} %>"><%= "#{car.make} #{car.model}" %></a></h4>
+  <p>Year: <%= car.year %></p>
+  <p>Price: $<%= car.price %></p>
+<% end %>

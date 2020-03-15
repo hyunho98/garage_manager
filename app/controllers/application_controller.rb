@@ -32,6 +32,7 @@ class ApplicationController < Sinatra::Base
         session[:error] = "You are not logged in!"
         redirect '/'
       end
+    end
 
   end
 
