@@ -1,5 +1,11 @@
 class GaragesController < ApplicationController
 
+  get '/garages/new' do
+    not_logged_in?
+    @user = current_user
+    erb:'/garages/new'
+  end
+
   get '/garages' do
     not_logged_in?
     @user = current_user
@@ -15,9 +21,17 @@ class GaragesController < ApplicationController
     erb :'/garages/show'
   end
 
-  get '/garages/new' do
+  post '/garages' do
     not_logged_in?
-    @user = current_user
-    erb:'/garages/new'
+    if !params[:name].empty? && !params[:address].empty? && !params[:capacity].empty?
+      garage = Garage.new(name: params[:name], address: params[:address], capacity: params[:capacity])
+      if garage.save
+        current_user.garages << garage
+        redirect "/garages/#{garage.id}"
+      else
+        redirect "/garages/new"
+      end
+    end
   end
+
 end

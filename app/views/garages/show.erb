@@ -1,6 +1,6 @@
 <h2><%= @garage.name %></h2>
 <br>
-<% if @full do %>
+<% if @full %>
   <h5>This garage is full!</h5>
 <% else %>
   <h5><%= @garage.capacity - @cars.length %> spaces available</h5>
