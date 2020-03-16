@@ -19,7 +19,7 @@
 <p>Please select a garage for this car: </p>
 <% @garages.each do |garage| %>
   <% if garage.capacity > garage.cars.length %>
-    <input id="<%= garage.id %>" type="radio" name="garage" value="<%= garage.id %>"></input><br>
+    <input id="<%= garage.id %>" type="radio" name="garage_id" value="<%= garage.id %>"></input><br>
   <% end %>
 <% end %>
 
