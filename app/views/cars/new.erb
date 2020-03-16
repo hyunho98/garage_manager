@@ -15,6 +15,13 @@
 <% @type.each do |type| %>
   <input id="<%= type %>" type="radio" name="type" value="<%= type %>"><%= type %></input><br>
 <% end %>
+<br>
+<p>Please select a garage for this car: </p>
+<% @garages.each do |garage| %>
+  <% if garage.capacity > garage.cars.length %>
+    <input id="<%= garage.id %>" type="radio" name="garage" value="<%= garage.id %>"></input><br>
+  <% end %>
+<% end %>
 
 
   <input id="submit" type="submit" value="Create Car">

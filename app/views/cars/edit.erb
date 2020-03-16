@@ -16,13 +16,21 @@
   <label for="price">Price: </label>
   <input id="price" type="text" name="price"><br>
   <label for="license_plate">License Plate: </label>
-  <input id="license_plate" type="text" name="license_plate"><br>
-  <br><p>Select a type of car: </p>
+  <input id="license_plate" type="text" name="license_plate">
+  <br><br>
 
+  <p>Select a type of car: </p>
   <% @type.each do |type| %>
     <input id="<%= type %>" type="radio" name="type" value="<%= type %>" <%= 'checked' if @car.type == type %>><%= type %></input><br>
   <% end %>
-
+  <br>
+  <p>Please select a garage for this car: </p>
+  <% @garages.each do |garage| %>
+    <% if garage.capacity > garage.cars.length %>
+      <input id="<%= garage.id %>" type="radio" name="garage" value="<%= garage.id %>" <%= 'checked' if @garage.id == garage.id %>><%= garage.name %></input><br>
+    <% end %>
+  <% end %>
+  <br>
 
   <input id="submit" type="submit" value="Save Changes">
 </form>
