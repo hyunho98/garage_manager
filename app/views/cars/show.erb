@@ -1,0 +1,7 @@
+<h2><%= "#{@car.year} #{@car.make} #{@car.model}" %></h2>
+<h3><%= @car.type %></h3>
+<h4>License Plate: <%= @car.license_plate %></h4>
+<h4>Price: $<%= @car.price %></h4>
+<h4>Current Garage: <a href="/garages/<%= @garage.id %>"><%= @garage.name %></a></h4>
+<br>
+<h4>Click <a href="/cars/<%= @car.id %>/edit">HERE</a> to edit this car!</h4>
