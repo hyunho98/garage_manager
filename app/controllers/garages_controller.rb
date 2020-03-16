@@ -24,10 +24,10 @@ class GaragesController < ApplicationController
 
   get '/garages/:id/edit' do
     not_logged_in?
-    @garage = Garage.find(params[:id])
+    @garage = Garage.find_by(id: params[:id])
     belong_here?(@garage.user_id)
     @cars = @garage.cars
-    @garageless = Car.all.collect {|car| car.garage == nil}
+    @garageless = current_user.cars.collect {|car| car.garage == nil}
     erb :'/garages/edit'
   end
 
@@ -68,6 +68,7 @@ class GaragesController < ApplicationController
   delete '/garages/:id' do
     not_logged_in?
     @garage = Garage.find(params[:id])
+    @garage.cars = []
     if @garage
       @garage.destroy
       redirect '/garages'

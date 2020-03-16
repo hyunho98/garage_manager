@@ -1,35 +1,40 @@
 <h1>EDIT FORM</h1>
 <h2><%= "#{@car.year} #{@car.make} #{@car.model}" %></h2>
-<h3><%= @car.type %></h3>
+<h3><%= @car.car_type %></h3>
 <h4>License Plate: <%= @car.license_plate %></h4>
 <h4>Price: $<%= @car.price %></h4>
-<h4>Current Garage: <a href="/garages/<%= @garage.id %>"><%= @garage.name %></a></h4>
+<% if @garage %>
+  <h4>Current Garage: <a href="/garages/<%= @garage.id %>"><%= @garage.name %></a></h4>
+<% else %>
+  <h4>This car is currently not in a garage</h4>
+<% end %>
 <br><br>
 <form action="/cars/<%= @car.id %>" method="POST">
-  <input id="hidden" type="hidden" name="_method" value="PATCH">
+  <input id="hidden" type="hidden" name="_method" value="patch">
   <label for="year">Year: </label>
-  <input id="year" type="text" name="year"><br>
+  <input id="year" type="text" name="car[year]"><br>
   <label for="make">Make: </label>
-  <input id="make" type="text" name="make"><br>
+  <input id="make" type="text" name="car[make]"><br>
   <label for="model">Model: </label>
-  <input id="model" type="text" name="model"><br>
+  <input id="model" type="text" name="car[model]" required><br>
   <label for="price">Price: </label>
-  <input id="price" type="text" name="price"><br>
+  <input id="price" type="text" name="car[price]"><br>
   <label for="license_plate">License Plate: </label>
-  <input id="license_plate" type="text" name="license_plate">
+  <input id="license_plate" type="text" name="car[license_plate]">
   <br><br>
 
   <p>Select a type of car: </p>
-  <% @type.each do |type| %>
-    <input id="<%= type %>" type="radio" name="type" value="<%= type %>" <%= 'checked' if @car.type == type %>><%= type %></input><br>
+  <% @types.each do |type| %>
+    <input id="<%= type %>" type="radio" name="car[car_type]" value="<%= type %>" <%= 'checked' if @car.car_type == type %>><%= type %></input><br>
   <% end %>
   <br>
   <p>Please select a garage for this car: </p>
   <% @garages.each do |garage| %>
     <% if garage.capacity > garage.cars.length %>
-      <input id="<%= garage.id %>" type="radio" name="garage_id" value="<%= garage.id %>" <%= 'checked' if @garage.id == garage.id %>><%= garage.name %></input><br>
+      <input id="<%= garage.id %>" type="radio" name="car[garage_id]" value="<%= garage.id %>" <%= 'checked' if @garage == garage %>><%= garage.name %></input><br>
     <% end %>
   <% end %>
+  <input id="no_garage" type="radio" name="car[garage_id]" value="no_garage" <%= 'checked' if !@garage %>>No Garage</input><br>
   <br>
 
   <input id="submit" type="submit" value="Save Changes">

@@ -16,10 +16,11 @@
   <h4>Click on a car to view it!</h4>
 <% end %>
 <% @cars.each do |car| %>
-  <h4><a href="/car/<% #{car.id} %>"><%= "#{car.year} #{car.make} #{car.model}" %></a></h4>
+  <h4><a href="/car/<%= car.id %>"><%= "#{car.year} #{car.make} #{car.model}" %></a></h4>
 <% end %>
 <br><br>
 <form action="/garages/<%= @garage.id %>" method="POST">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <input id="delete" type="submit" value="DELETE THIS GARAGE">
 </form>
+<a class='branding' href='/index'></a>

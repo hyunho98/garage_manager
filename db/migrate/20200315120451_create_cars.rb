@@ -3,7 +3,7 @@ class CreateCars < ActiveRecord::Migration
     create_table :cars do |t|
       t.string :make
       t.string :model
-      t.string :type
+      t.string :car_type
       t.string :license_plate
       t.integer :year
       t.float :price

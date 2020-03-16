@@ -4,11 +4,11 @@
 <br>
 <h3>To look at a car, click on the name!</h3>
 <% @cars.each do |car| %>
-  <h4>#<%= car.id %><a href="/car/<% #{car.id} %>"><%= "#{car.year} #{car.make} #{car.model}" %></a></h4>
-  <% if car.garage_id.empty? %>
-    <h3>This car does NOT currently belong to a garage</h3>
+  <h4>#<%= car.id %> <a href="/cars/<%= car.id %>"><%= "#{car.year} #{car.make} #{car.model}" %></a></h4>
+  <% if !car.garage_id %>
+    <h5>This car is currently not in a garage</h5>
   <% else %>
-    <h3>Current Garage: <a href="/garages/<%= car.garage_id %>"><%= Garage.find(car.garage_id).name %></a></h3>
+    <h5>Current Garage: <a href="/garages/<%= car.garage_id %>"><%= Garage.find(car.garage_id).name %></a></h5>
   <% end %>
   <br>
 <% end %>

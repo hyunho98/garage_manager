@@ -12,14 +12,14 @@
   <label for="license_plate">License Plate: </label>
   <input id="license_plate" type="text" name="license_plate"><br>
 <br><p>Select a type of car: </p>
-<% @type.each do |type| %>
-  <input id="<%= type %>" type="radio" name="type" value="<%= type %>"><%= type %></input><br>
+<% @types.each do |type| %>
+  <input id="<%= type %>" type="radio" name="car_type" value="<%= type %>"><%= type %></input><br>
 <% end %>
 <br>
-<p>Please select a garage for this car: </p>
+<p>Please select a garage for this car (Optional): </p>
 <% @garages.each do |garage| %>
   <% if garage.capacity > garage.cars.length %>
-    <input id="<%= garage.id %>" type="radio" name="garage_id" value="<%= garage.id %>"></input><br>
+    <input id="<%= garage.id %>" type="radio" name="garage_id" value="<%= garage.id %>"><%= garage.name %></input><br>
   <% end %>
 <% end %>
 
