@@ -12,18 +12,9 @@
   <label for="license_plate">License Plate: </label>
   <input id="license_plate" type="text" name="license_plate"><br>
 <br><p>Select a type of car: </p>
-  <label for="suv">SUV</label>
-  <input id="suv" type="radio" name="type" value="suv"><br>
-  <label for="truck">Truck</label>
-  <input id="truck" type="radio" name="type" value="truck"><br>
-  <label for="sedan">Sedan</label>
-  <input id="sedan" type="radio" name="type" value="sedan"><br>
-  <label for="coupe">Coupe</label>
-  <input id="coupe" type="radio" name="type" value="coupe"><br>
-  <label for="wagon">Wagon</label>
-  <input id="wagon" type="radio" name="type" value="wagon"><br>
-  <label for="crossover">Crossover</label>
-  <input id="crossover" type="radio" name="type" value="crossover"><br>
+<% @type.each do |type| %>
+  <input id="<%= type %>" type="radio" name="type" value="<%= type %>"><%= type %></input><br>
+<% end %>
 
 
   <input id="submit" type="submit" value="Create Car">

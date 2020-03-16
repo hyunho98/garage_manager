@@ -39,6 +39,10 @@ class ApplicationController < Sinatra::Base
       end
     end
 
+    def car_types
+      ["SUV", "Truck", "Sedan", "Coupe", "Wagon", "Crossover"]
+    end
+
   end
 
 end

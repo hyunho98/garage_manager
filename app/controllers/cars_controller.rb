@@ -3,6 +3,7 @@ class CarsController < ApplicationController
   get '/cars/new' do
     not_logged_in?
     @user = current_user
+    @types = car_types
     erb:'/cars/new'
   end
 
@@ -25,9 +26,10 @@ class CarsController < ApplicationController
     not_logged_in?
     @car = Car.find(params[:id])
     belong_here?(@car.user_id)
-    @cars = @garage.cars
-    @garageless = Car.all.collect {|car| car.garage == nil}
-    erb :'/garages/edit'
+    @garage = Garage.find(@car.garage_id)
+    @garages = current_user.garages
+    @types = car_types
+    erb :'/cars/edit'
   end
 
 end
