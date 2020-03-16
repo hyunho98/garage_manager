@@ -12,15 +12,15 @@
 <form action="/cars/<%= @car.id %>" method="POST">
   <input id="hidden" type="hidden" name="_method" value="patch">
   <label for="year">Year: </label>
-  <input id="year" type="text" name="car[year]"><br>
+  <input id="year" type="text" name="car[year]" value="<%= @car.year %>"><br>
   <label for="make">Make: </label>
-  <input id="make" type="text" name="car[make]"><br>
+  <input id="make" type="text" name="car[make]" value="<%= @car.make %>"><br>
   <label for="model">Model: </label>
-  <input id="model" type="text" name="car[model]" required><br>
+  <input id="model" type="text" name="car[model]" value="<%= @car.model %>"><br>
   <label for="price">Price: </label>
-  <input id="price" type="text" name="car[price]"><br>
+  <input id="price" type="text" name="car[price]" value="<%= @car.price %>"><br>
   <label for="license_plate">License Plate: </label>
-  <input id="license_plate" type="text" name="car[license_plate]">
+  <input id="license_plate" type="text" name="car[license_plate]" value="<%= @car.license_plate %>">
   <br><br>
 
   <p>Select a type of car: </p>

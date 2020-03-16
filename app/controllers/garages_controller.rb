@@ -27,7 +27,8 @@ class GaragesController < ApplicationController
     @garage = Garage.find_by(id: params[:id])
     belong_here?(@garage.user_id)
     @cars = @garage.cars
-    @garageless = current_user.cars.collect {|car| car.garage == nil}
+    @garageless = []
+    current_user.cars.each {|car| !car.garage ? @garageless << car : nil}
     erb :'/garages/edit'
   end
 
@@ -50,18 +51,18 @@ class GaragesController < ApplicationController
       params[:garage][:car_ids] = []
     end
 
-    @garage = Garage.find(params[:id])
+    garage = Garage.find(params[:id])
 
-    if params[:garage][:car_ids].length > @garage.cars.length
+    if params[:garage][:car_ids].length > params[:garage][:capacity].to_i
       redirect "/garages/#{params[:id]}/edit"
     else
-      @garage.cars.each do |car|
+      garage.cars.each do |car|
         if !params[:garage][:car_ids].include?(car.id)
-          car.garage = nil
+          garage.cars.delete(car.id)
         end
       end
-      @garage.update(params[:garage])
-      redirect "/garages/#{@garage.id}"
+      garage.update(params[:garage])
+      redirect "/garages/#{garage.id}"
     end
   end
 

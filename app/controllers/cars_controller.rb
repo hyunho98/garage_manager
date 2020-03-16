@@ -35,18 +35,16 @@ class CarsController < ApplicationController
 
   post '/cars' do
     not_logged_in?
-    if !params[:year].empty? && !params[:make].empty? && !params[:model].empty? && !params[:car_type].empty? && !params[:license_plate].empty? && !params[:price].empty?
-      car = Car.new(year: params[:year].to_i, make: params[:make], model: params[:model], car_type: params[:car_type], license_plate: params[:license_plate], price: params[:price].to_f, garage_id: params[:garage_id])
-      if car.save
-        if params[:garage_id]
-          garage = Garage.find(params[:garage_id])
-          garage.cars << car
-        end
-        current_user.cars << car
-        redirect "/cars/#{car.id}"
-      else
-        redirect "/cars/new"
+    car = Car.new(year: params[:year].to_i, make: params[:make], model: params[:model], car_type: params[:car_type], license_plate: params[:license_plate], price: params[:price].to_f, garage_id: params[:garage_id])
+    if car.save
+      if params[:garage_id]
+        garage = Garage.find(params[:garage_id])
+        garage.cars << car
       end
+      current_user.cars << car
+      redirect "/cars/#{car.id}"
+    else
+      redirect "/cars/new"
     end
   end
 
@@ -57,7 +55,7 @@ class CarsController < ApplicationController
 
     if params[:car][:garage_id] == "no_garage"
       garage = Garage.find(@car.garage_id)
-      garage.delete(@car.id)
+      garage.cars.delete(@car.id)
       params[:car][:garage_id].clear
     end
 

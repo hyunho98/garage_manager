@@ -1,8 +1,9 @@
+<a href="/garages">GARAGES</a>
 <h1>EDIT FORM</h1>
-<h2>Name: <%= @garage.name %></h2>
+<h2>for <%= @garage.name %></h2>
 <h3>Location: <%= @garage.address %></h3>
 <h3>Capacity: <%= "#{@cars.length} out of #{@garage.capacity}" %></h3>
-<br><br>
+<br>
 <form action="/garages/<%= @garage.id %>" method="POST">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
 
@@ -10,26 +11,27 @@
     <h5>Uncheck the boxes of the cars you wish to REMOVE from this garage</h5>
   <% end %>
   <% @cars.each do |car| %>
-  <input type="checkbox" name="garage[car_ids][]" id="<% car.id %>" value="<% car.id %>" <% 'checked' %>><%= "#{car.year} #{car.make} #{car.model}" %></input><br>
+  <input type="checkbox" name="garage[car_ids][]" id="<%= car.id %>" value="<%= car.id %>" checked>#<%= "#{car.id} #{car.year} #{car.make} #{car.model}" %></input><br>
   <% end %>
 
   <% if @garageless.length > 0 %>
     <h5>Check the boxes of the cars you wish to ADD to this garage</h5>
+    <% @garageless.each do |car| %>
+      <input type="checkbox" name="garage[car_ids][]" id="<%= car.id %>" value="<%= car.id %>">#<%= "#{car.id } #{car.year} #{car.make} #{car.model}" %></input><br>
+    <% end %>
   <% end %>
-  <% @garageless.each do |car| %>
-  <input type="checkbox" name="garage[car_ids][]" id="<% car.id %>" value="<% car.id %>"><%= "#{car.year} #{car.make} #{car.model}" %></input><br>
-  <% end %>
+  <br>
 
-  <h5>MAKE SURE THE TOTAL AMOUNT OF CHECKED BOXES DOES NOT SURPASS THE MAXIMUM CAPACITY</h5>
+  <h5>MAKE SURE THE TOTAL AMOUNT OF CHECKED BOXES DOES NOT EXCEED THE MAXIMUM CAPACITY</h5>
 
   <br>
 
   <label for="name">Name: </label>
-  <input id="name" type="text" name="garage[name]"><br>
+  <input id="name" type="text" name="garage[name]" value="<%= @garage.name %>"><br>
   <label for="location">Location: </label>
-  <input id="location" type="text" name="garage[address]"><br>
+  <input id="location" type="text" name="garage[address]" value="<%= @garage.address %>"><br>
   <label for="capacity">Capacity: </label>
-  <input id="capacity" type="number" name="garage[capacity]"><br>
+  <input id="capacity" type="number" name="garage[capacity]" value="<%= @garage.capacity %>"><br>
 
   <input id="submit" type="submit" value="Save Changes">
 </form>

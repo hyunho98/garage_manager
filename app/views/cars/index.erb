@@ -1,10 +1,8 @@
 <h2><%= @user.username %>'s Cars</h2>
+<h3>To view a car, click on it's name!</h3>
 <br>
-<h3>Click <a href='/cars/new'>HERE</a> to create a new car</h3>
-<br>
-<h3>To look at a car, click on the name!</h3>
 <% @cars.each do |car| %>
-  <h4>#<%= car.id %> <a href="/cars/<%= car.id %>"><%= "#{car.year} #{car.make} #{car.model}" %></a></h4>
+  <h4><a href="/cars/<%= car.id %>">#<%= car.id %> <%= "#{car.year} #{car.make} #{car.model}" %></a></h4>
   <% if !car.garage_id %>
     <h5>This car is currently not in a garage</h5>
   <% else %>
@@ -12,3 +10,4 @@
   <% end %>
   <br>
 <% end %>
+<h3>Click <a href='/cars/new'>HERE</a> to create a new car</h3>
