@@ -3,7 +3,6 @@ class GaragesController < ApplicationController
   get '/garages/new' do
     not_logged_in?
     @user = current_user
-    @garages = @user.garages
     erb:'/garages/new'
   end
 

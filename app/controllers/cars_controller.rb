@@ -55,7 +55,15 @@ class CarsController < ApplicationController
 
     @car = Car.find(params[:id])
     @car.update(params)
-    redirect "/garages/#{@garage.id}"
+    redirect "/cars/#{@car.id}"
+  end
+
+  delete '/cars/:id' do
+    not_logged_in?
+    @car = car.find(params[:id])
+    if @car
+      @car.destroy
+      redirect '/cars'
     end
   end
 

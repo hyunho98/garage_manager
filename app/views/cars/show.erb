@@ -5,3 +5,8 @@
 <h4>Current Garage: <a href="/garages/<%= @garage.id %>"><%= @garage.name %></a></h4>
 <br>
 <h4>Click <a href="/cars/<%= @car.id %>/edit">HERE</a> to edit this car!</h4>
+<br><br>
+<form action="/cars/<%= @car.id %>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input id="delete" type="submit" value="DELETE THIS CAR">
+</form>
