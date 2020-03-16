@@ -16,6 +16,7 @@ class GaragesController < ApplicationController
   get '/garages/:id' do
     not_logged_in?
     @garage = Garage.find_by(id: params[:id])
+    belong_here?(@garage.user.id)
     @cars = @garage.cars
     @full = ((@garage.capacity - @cars.length) <= 0)
     erb :'/garages/show'
@@ -24,6 +25,7 @@ class GaragesController < ApplicationController
   get '/garages/:id/edit' do
     not_logged_in?
     @garage = Garage.find(params[:id])
+    belong_here?(@garage.user.id)
     @cars = @garage.cars
     @garageless = Car.all.collect {|car| car.garage == nil}
     erb :'/garages/edit'
@@ -60,6 +62,15 @@ class GaragesController < ApplicationController
       end
       @garage.update(params[:garage])
       redirect "/garages/#{@garage.id}"
+    end
+  end
+
+  delete '/garages/:id' do
+    not_logged_in?
+    @garage = Garage.find(params[:id])
+    if @garage
+      @garage.destroy
+      redirect '/garages'
     end
   end
 

@@ -33,6 +33,12 @@ class ApplicationController < Sinatra::Base
       end
     end
 
+    def belong_here?(id)
+      if current_user.id != id
+        redirect '/index'
+      end
+    end
+
   end
 
 end

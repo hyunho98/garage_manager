@@ -10,14 +10,14 @@
     <h5>Uncheck the boxes of the cars you wish to REMOVE from this garage</h5>
   <% end %>
   <% @cars.each do |car| %>
-  <input type="checkbox" name="garage[car_ids][]" id="<% car.id %>" value="<% car.id %>" <% 'checked' %>><br>
+  <input type="checkbox" name="garage[car_ids][]" id="<% car.id %>" value="<% car.id %>" <% 'checked' %>><%= "#{car.year} #{car.make} #{car.model}" %></input><br>
   <% end %>
 
   <% if @garageless.length > 0 %>
     <h5>Check the boxes of the cars you wish to ADD to this garage</h5>
   <% end %>
   <% @garageless.each do |car| %>
-  <input type="checkbox" name="garage[car_ids][]" id="<% car.id %>" value="<% car.id %>"><br>
+  <input type="checkbox" name="garage[car_ids][]" id="<% car.id %>" value="<% car.id %>"><%= "#{car.year} #{car.make} #{car.model}" %></input><br>
   <% end %>
 
   <h5>MAKE SURE THE TOTAL AMOUNT OF CHECKED BOXES DOES NOT SURPASS THE MAXIMUM CAPACITY</h5>

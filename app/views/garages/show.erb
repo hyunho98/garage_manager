@@ -1,18 +1,25 @@
 <h2><%= @garage.name %></h2>
 <h3><%= @garage.address %></h3>
 <br>
+<h4>Click <a href="/garages/<%= @garage.id %>/edit">HERE</a> to edit this garage!</h4><br>
 <% if @full %>
-  <h5>This garage is full!</h5>
+  <h4>This garage is full!</h4>
 <% else %>
-  <h5><%= @garage.capacity - @cars.length %> out of <%= @garage.capacity %> spaces available</h5>
+  <h4><%= @garage.capacity - @cars.length %> out of <%= @garage.capacity %> spaces available</h4>
   <br>
-  <h5>Click <a href="/garages/<%= @garage.id %>/edit">HERE</a> to edit this garage!
-  <h5>Click <a href='/cars/new'>HERE</a> to add a car to this garage!</h5>
+  <h4>Click <a href='/cars/new'>HERE</a> to add a car to this garage!</h4>
 <% end %>
 <br>
-<h5>To edit a car, click on it's name!</h5>
-<% @cars.each do |car| %>
-  <h4><a href="/car/<% #{car.id} %>"><%= "#{car.make} #{car.model}" %></a></h4>
-  <p>Year: <%= car.year %></p>
-  <p>Price: $<%= car.price %></p>
+<% if @cars.length == 0 %>
+  <h4>There don't seem to be any cars in this garage...</h4>
+<% else %>
+  <h4>Click on a car to view it!</h4>
 <% end %>
+<% @cars.each do |car| %>
+  <h4><a href="/car/<% #{car.id} %>"><%= "#{car.year} #{car.make} #{car.model}" %></a></h4>
+<% end %>
+<br><br>
+<form action="/garages/<%= @garage.id %>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input id="delete" type="submit" value="DELETE THIS GARAGE">
+</form>

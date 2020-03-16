@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 20200315173515) do
   create_table "cars", force: :cascade do |t|
     t.string  "make"
     t.string  "model"
+    t.string  "type"
+    t.string  "license_plate"
     t.integer "year"
     t.float   "price"
     t.integer "garage_id"
