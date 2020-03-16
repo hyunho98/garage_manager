@@ -21,4 +21,13 @@ class CarsController < ApplicationController
     erb :'/cars/show'
   end
 
+  get '/cars/:id/edit' do
+    not_logged_in?
+    @car = Car.find(params[:id])
+    belong_here?(@car.user_id)
+    @cars = @garage.cars
+    @garageless = Car.all.collect {|car| car.garage == nil}
+    erb :'/garages/edit'
+  end
+
 end
