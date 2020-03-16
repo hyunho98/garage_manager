@@ -1,8 +1,8 @@
 <h2><%= @user.username %>'s Garages</h2>
 <br>
-<h5>Click <a href='/garages/new'>HERE</a> to create a new garage</h4>
+<h3>Click <a href='/garages/new'>HERE</a> to create a new garage</h3>
 <br>
-<h5>To look at a garage, click on the name!</h5>
+<h3>To look at a garage, click on the name!</h3>
 <% @garages.each do |garage| %>
   <h4>Name: <a href="/garages/<%= garage.id %>"><%= garage.name %></a></h4>
   <p>Location: <%= garage.address %><br>

@@ -1,7 +1,7 @@
 <h1>EDIT FORM</h1>
 <h2>Name: <%= @garage.name %></h2>
 <h3>Location: <%= @garage.address %></h3>
-<h3>Capacity: <%= "#{@cars.length} out of #{@garage.capacity}" %>
+<h3>Capacity: <%= "#{@cars.length} out of #{@garage.capacity}" %></h3>
 <br>
 <form action="/garages/<%= @garage.id %>" method="POST">
   <input id="hidden" type="hidden" name="_method" value="PATCH">

@@ -1,0 +1,8 @@
+<h2><%= @user.username %>'s Cars</h2>
+<br>
+<h3>Click <a href='/cars/new'>HERE</a> to create a new car</h3>
+<br>
+<h3>To look at a car, click on the name!</h3>
+<% @cars.each do |car| %>
+  <h4>#<%= car.id %><a href="/car/<% #{car.id} %>"><%= "#{car.year} #{car.make} #{car.model}" %></a></h4>
+<% end %>
