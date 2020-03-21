@@ -11,11 +11,11 @@ gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem 'tux'
-gem 'database_cleaner-active_record'
+#gem 'database_cleaner-active_record'
 
 group :test do
   gem 'rspec'
   gem 'capybara'
   gem 'rack-test'
-  gem 'database_cleaner-active_record'
+  #gem 'database_cleaner-active_record'
 end
