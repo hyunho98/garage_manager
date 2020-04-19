@@ -17,20 +17,28 @@ class CarsController < ApplicationController
 
   get '/cars/:id' do
     not_logged_in?
-    @car = Car.find(params[:id])
-    belong_here?(@car.user.id)
-    @garage = Garage.find_by(id: @car.garage_id)
-    erb :'/cars/show'
+    if Car.exists?(params[:id])
+      @car = Car.find(params[:id])
+      belong_here?(@car.user.id)
+      @garage = Garage.find_by(id: @car.garage_id)
+      erb :'/cars/show'
+    else
+      redirect "/cars"
+    end
   end
 
   get '/cars/:id/edit' do
     not_logged_in?
-    @car = Car.find(params[:id])
-    belong_here?(@car.user_id)
-    @garage = Garage.find_by(id: @car.garage_id)
-    @garages = current_user.garages
-    @types = car_types
-    erb :'/cars/edit'
+    if Car.exists?(params[:id])
+      @car = Car.find(params[:id])
+      belong_here?(@car.user_id)
+      @garage = Garage.find_by(id: @car.garage_id)
+      @garages = current_user.garages
+      @types = car_types
+      erb :'/cars/edit'
+    else
+      redirect "/cars"
+    end
   end
 
   post '/cars' do
